@@ -4,9 +4,9 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // ✅ Enable CORS if frontend is on different origin
+app.use(cors());
 
-// POST endpoint to receive make/model/year from frontend
+// ✅ Main API endpoint
 app.post('/api/fetch-ktech', async (req, res) => {
   const { make, model, year } = req.body;
 
@@ -48,7 +48,6 @@ app.post('/api/fetch-ktech', async (req, res) => {
 
     await browser.close();
 
-    // ✅ Send data back to frontend
     return res.json({
       status: 'success',
       bike_info: bikeHTML,
@@ -61,7 +60,6 @@ app.post('/api/fetch-ktech', async (req, res) => {
   }
 });
 
-// Start server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
